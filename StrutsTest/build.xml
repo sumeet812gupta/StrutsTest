@@ -1,0 +1,92 @@
+<project name="StrutsTest" default="ear" basedir=".">
+	<property name="jvm.name" value="StrutsTest" />
+	<property name="src.dir" value="src" />
+	<property name="WebRoot.dir" value="WebContent" />
+	<property name="classes.dir" value="WebContent/WEB-INF/classes" />
+	<property name="lib.dir" value="WebContent/WEB-INF/lib" />
+	<property name="catalina.home" value="C:\MAKE_LSS\Tools\apache-tomcat-6.0.37" />
+	<property name="properties.dir" value="resource" />
+	<property name="deploy.dir" value="deploy" />
+
+
+
+	<property name="dev-ear-lifecycle-jar.file" value="${deploy.dir}/META-INF/cisco.dev.jar" />
+	<property name="stage-ear-lifecycle-jar.file" value="${deploy.dir}/META-INF/cisco.stage.jar"/>
+	<property name="prod-ear-lifecycle-jar.file" value="${deploy.dir}/META-INF/cisco.prod.jar" />
+	
+	<property name="dev-war-lifecycle-jar.file" value="${WebRoot.dir}/WEB-INF/cisco.dev.jar" />
+	<property name="stage-war-lifecycle-jar.file" value="${WebRoot.dir}/WEB-INF/cisco.stage.jar"/>
+	<property name="prod-war-lifecycle-jar.file" value="${WebRoot.dir}/WEB-INF/cisco.prod.jar" />
+
+	<property name="war.file" value="${deploy.dir}/${jvm.name}.war" />
+	<property name="ear.file" value="${deploy.dir}/${jvm.name}.ear" />
+
+
+	<path id="all-libs">
+		<fileset dir="${lib.dir}" includes="*.jar" />
+		<fileset dir="${catalina.home}\lib">
+			<include name="servlet*.jar" />
+			<include name="jsp*.jar" />
+		</fileset>
+	</path>
+
+	<path id="project.classpath">
+		<path refid="all-libs" />
+		<pathelement location="${java.class.path}" />
+	</path>
+
+	<target name="compile" description="Compile all the source code">
+		<mkdir dir="${classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false">
+			<classpath>
+				<path refid="project.classpath" />
+			</classpath>
+		</javac>
+	</target>
+	
+	
+	<target name="jar-lifecycle-files" description="Create JAR files for lifecyclce dependent files">
+			<jar jarfile="${dev-war-lifecycle-jar.file}" basedir="${deploy.dir}/dev/WAR" />
+		    <jar jarfile="${dev-ear-lifecycle-jar.file}" basedir="${deploy.dir}/dev/EAR" />
+		
+		<jar jarfile="${stage-war-lifecycle-jar.file}" basedir="${deploy.dir}/stage/WAR" />
+		<jar jarfile="${prod-war-lifecycle-jar.file}" basedir="${deploy.dir}/prod/WAR" />
+		<jar jarfile="${stage-ear-lifecycle-jar.file}" basedir="${deploy.dir}/stage/EAR" />
+		<jar jarfile="${prod-ear-lifecycle-jar.file}" basedir="${deploy.dir}/prod/EAR" />
+		
+		
+    </target>
+
+	<target name="war" depends="clean,compile,jar-lifecycle-files">
+		<mkdir dir="${deploy.dir}" />
+		<copy todir="${classes.dir}" verbose="true">
+					<fileset dir="${properties.dir}" />
+		</copy>
+		<war warfile="${war.file}" webxml="WebContent/WEB-INF/web.xml">
+			<webinf dir="WebContent/WEB-INF" excludes="web.xml" />
+			<fileset dir="${WebRoot.dir}" excludes="WEB-INF/**" />
+		</war>
+	</target>
+
+	<target name="ear" depends="clean,war">
+		<mkdir dir="${deploy.dir}" />
+		
+		
+		<ear destfile="${ear.file}" appxml="${deploy.dir}/META-INF/application.xml">
+			<metainf dir="${deploy.dir}/META-INF" excludes="application.xml" />
+			<fileset dir="${deploy.dir}" includes="*.war" />
+		</ear>
+	</target>
+
+	<target name="clean" description="Delete files created in the build process">
+		<delete file="${war.file}" />
+		<delete file="${ear.file}" />
+		<delete>
+			<fileset dir="${WebRoot.dir}/WEB-INF" includes="*.jar" />
+		</delete>
+		<delete>
+			<fileset dir="${deploy.dir}/META-INF" includes="*.jar" />
+		</delete>
+
+	</target>
+</project>

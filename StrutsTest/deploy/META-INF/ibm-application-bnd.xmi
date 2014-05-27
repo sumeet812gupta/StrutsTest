@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applicationbnd:ApplicationBinding xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:applicationbnd="applicationbnd.xmi" xmlns:common="common.xmi" xmlns:application="application.xmi" xmi:id="ApplicationBinding_1">
+
+  <authorizationTable xmi:id="AuthorizationTable_1"> 
+    <authorizations xmi:id="RoleAssignment_1"> 
+      <specialSubjects xmi:type="applicationbnd:AllAuthenticatedUsers" xmi:id="AllAuthenticatedUsers_1" name="AllAuthenticatedUsers"/> 
+      <role href="META-INF/application.xml#AllAuthenticatedUsers"/> 
+    </authorizations>
+  </authorizationTable>
+  <application href="META-INF/application.xml#cvcmm5"/>
+</applicationbnd:ApplicationBinding>

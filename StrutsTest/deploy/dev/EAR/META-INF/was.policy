@@ -1,0 +1,51 @@
+// The following permissions apply to all the components under the application.
+grant codebase "file:${application}" {
+
+permission java.net.SocketPermission "dsxstage.cisco.com:389", "resolve,connect";
+permission java.util.logging.LoggingPermission "control";
+permission java.net.SocketPermission "entro-dev.cisco.com:389", "resolve,connect";
+permission java.net.SocketPermission "ldap.cisco.com:389", "resolve,connect";
+permission java.lang.RuntimePermission "stopThread";
+
+ //for sending mails
+permission java.net.SocketPermission "outbound.cisco.com:25", "resolve,connect";
+//permission java.net.SocketPermission "javamail.cisco.com:25", "resolve,connect";
+
+permission com.ibm.websphere.security.WebSphereRuntimePermission "ContextManager.getServerCredential";
+
+permission java.net.SocketPermission "wsgx-nprod1-01.cisco.com", "resolve";
+permission java.net.SocketPermission "wsgx-nprod1-01.cisco.com:8243", "connect,resolve";
+
+permission java.io.FilePermission "${was.install.root}/-", "read";
+
+permission java.lang.RuntimePermission "accessClassInPackage.sun.io";
+permission java.lang.RuntimePermission "accessClassInPackage.sun.misc";
+permission java.lang.RuntimePermission "accessClassInPackage.sun.reflect";
+
+//permission java.lang.RuntimePermission "createClassLoader";
+permission com.ibm.oti.shared.SharedClassPermission "java.net.URLClassLoader", "read,write";
+permission com.ibm.oti.shared.SharedClassPermission "org.apache.axis2.deployment.DeploymentClassLoader", "read,write";
+//permission java.lang.RuntimePermission "setContextClassLoader";
+permission java.lang.RuntimePermission "accessDeclaredMembers";  
+permission java.lang.RuntimePermission "getClassLoader";
+permission java.lang.RuntimePermission "getContextClassLoader";
+
+permission com.ibm.websphere.security.WebSphereRuntimePermission "ContextManager.getServerCredential";
+permission com.ibm.websphere.security.WebSphereRuntimePermission "accessRuntimeClasses";
+permission java.lang.reflect.ReflectPermission "suppressAccessChecks","";
+
+permission java.net.SocketPermission "ldap.cisco.com:389", "resolve,connect";
+permission java.lang.RuntimePermission "accessClassInPackage.sun.io";
+permission java.lang.RuntimePermission "accessClassInPackage.sun.reflect";
+permission java.lang.RuntimePermission "accessClassInPackage.sun.misc";
+permission java.lang.RuntimePermission "shutdownHooks";
+
+permission java.lang.RuntimePermission "stopThread";
+permission java.lang.RuntimePermission "modifyThread";
+permission java.lang.RuntimePermission "modifyThreadGroup";
+
+permission java.io.FilePermission "/opt/gen/xxcvcmm1/.mailcap", "read";
+permission java.io.FilePermission "/opt/gen/xxcvcmm1/.mime.types", "read";
+permission java.lang.RuntimePermission "getenv.msfevntadp.evnt100.monitor.db.jndiname";
+
+};

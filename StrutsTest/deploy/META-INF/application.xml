@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application PUBLIC "-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN" "http://java.sun.com/dtd/application_1_3.dtd">
+
+<application id="cvcmm1">
+  <display-name>Monitoring</display-name>
+  <module id="WebModule_cvcmm1">
+    <web>
+      <web-uri>cvcmm1.war</web-uri>
+      <context-root>/cvcm/msfo1/</context-root>
+    </web>
+  </module>
+  <security-role id="AllAuthenticatedUsers">
+    <role-name>AllAuthenticatedUsers</role-name>
+  </security-role>
+  <security-role id="al4">
+    <role-name>al4</role-name>
+  </security-role>
+  <security-role id="nosuchgroup">
+    <role-name>nosuchgroup</role-name>
+  </security-role>
+  <security-role id="demogroup">
+    <role-name>demogroup</role-name>
+  </security-role>
+</application>
